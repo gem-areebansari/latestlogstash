@@ -82,6 +82,7 @@ node { // CONGO !!
                 done
             """, returnStatus: true)
 
+            sh 'echo "result"'
             if (result != 0) {
                 error "Failed to delete indices"
             }
