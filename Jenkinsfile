@@ -63,7 +63,7 @@
 // }
 
 
-node {
+node { // CONGO !!
     try {
         stage('Delete Logstash Indices') {
             def result = sh(script: """
