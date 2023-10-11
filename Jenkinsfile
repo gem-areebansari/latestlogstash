@@ -44,7 +44,7 @@ node {
                 do
                     if [ \$count -lt 8 ]
                     then
-                        ((count++))
+                        count=\$((count + 1))
                         continue
                     fi
                     echo "Deleting index: \$index"
@@ -61,3 +61,4 @@ node {
         throw e
     }
 }
+
