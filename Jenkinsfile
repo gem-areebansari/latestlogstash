@@ -1,17 +1,25 @@
 node {
     try {
         stage('Get Logstash Indices') {
-            def indices = sh(script: """
+            def result = sh(script: """
                 curl -s -X GET "localhost:42895/_cat/indices?h=index&s=index:desc"
-            """, returnStatus: true).trim()
+            """, returnStatus: true)
 
-            echo "Logstash Indices: $indices"
+            if (result != 0) {
+                error "Failed to retrieve Logstash indices"
+            } else {
+                def indices = sh(script: """
+                    curl -s -X GET "localhost:42895/_cat/indices?h=index&s=index:desc"
+                """).trim()
+                echo "Logstash Indices: $indices"
+            }
         }
     } catch (Exception e) {
         currentBuild.result = 'FAILURE'
         throw e
     }
 }
+
 
 
 
