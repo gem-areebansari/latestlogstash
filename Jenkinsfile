@@ -13,7 +13,7 @@ node {
                 """, returnStdout: true).trim()
                 
                 if (indicesOutput) {
-                    echo "Logstash Indices: $indicesOutput"
+                    echo "$indicesOutput"
                 } else {
                     echo "No Logstash indices found."
                 }
