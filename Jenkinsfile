@@ -68,17 +68,15 @@ node { // CONGO !!
         stage('Delete Logstash Indices') {
             def result = sh(script: """
                 #!/bin/bash
-                //all the logstash indices are stored in variable 'indices' in descending order
                 indices=\$(curl -s -X GET "localhost:35523/_cat/indices?h=index&s=index:desc" | awk '{print \$1}' | grep 'logstash')
                 count=0
                 for index in \$indices
                 do
-                    if [ \$count -lt 5 ] //till count 5 we will skip i.e. 5 latest indices
+                    if [ \$count -lt 5 ] 
                     then
                         count=\$((count + 1))
                         continue
                     fi
-                    //now deleting the rest indices after skipping latest 5
                     echo "Deleting index: \$index"
                     curl -s -X DELETE "localhost:35523/\$index"
                 done
