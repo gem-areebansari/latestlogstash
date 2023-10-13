@@ -72,7 +72,7 @@ node { // CONGO !!
                 count=0
                 for index in \$indices
                 do
-                    if [ \$count -lt 8 ]
+                    if [ \$count -lt 5 ]
                     then
                         count=\$((count + 1))
                         continue
