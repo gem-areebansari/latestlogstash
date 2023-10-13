@@ -2,14 +2,14 @@ node {
     try {
         stage('Get Logstash Indices') {
             def indices = sh(script: """
-                curl -s -X GET "localhost:42895/_cat/indices?h=index&s=index:desc"
+                curl -s -X GET "localhost:35523/_cat/indices?h=index&s=index:desc"
             """, returnStatus: true, returnStdout: true)
 
             if (indices != 0) {
                 error "Failed to retrieve Logstash indices"
             } else {
                 def indicesOutput = sh(script: """
-                    curl -s -X GET "localhost:42895/_cat/indices?h=index&s=index:desc"
+                    curl -s -X GET "localhost:35523/_cat/indices?h=index&s=index:desc"
                 """, returnStdout: true).trim()
                 
                 if (indicesOutput) {
